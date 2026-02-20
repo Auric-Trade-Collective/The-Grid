@@ -1,42 +1,59 @@
 <script lang="ts">
-  import logo from './assets/images/logo-universal.png'
-  import {Greet} from '../wailsjs/go/main/App.js'
+  import { Greet } from "../wailsjs/go/main/App.js";
 
-  let resultText: string = "Please enter your name below 👇"
-  let name: string
+  let resultText: string = "Please enter your name below 👇";
+  let name: string;
 
   function greet(): void {
-    Greet(name).then(result => resultText = result)
+    Greet(name).then((result) => (resultText = result));
   }
 </script>
 
 <main>
-  <img alt="Wails logo" id="logo" src="{logo}">
-  <div class="result" id="result">{resultText}</div>
-  <div class="input-box" id="input">
-    <input autocomplete="off" bind:value={name} class="input" id="name" type="text"/>
-    <button class="btn" on:click={greet}>Greet</button>
+  <div class="center">
+    <img alt="Wails logo" id="logo" src="./logo-universal.png" />
+    <div class="result" id="result">{resultText}</div>
+    <div class="input-box" id="input">
+      <input
+        autocomplete="off"
+        bind:value={name}
+        class="input"
+        id="name"
+        type="text"
+      />
+      <button class="btn" on:click={greet}>Greet</button>
+    </div>
   </div>
 </main>
 
 <style>
+  main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 
   #logo {
     display: block;
-    width: 50%;
-    height: 50%;
-    margin: auto;
-    padding: 10% 0 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-origin: content-box;
+    width: 200px;
+    height: auto;
+    margin: 0 auto 1.5rem;
+    object-fit: contain;
   }
 
   .result {
     height: 20px;
     line-height: 20px;
-    margin: 1.5rem auto;
+    margin: 0 auto 1.5rem;
   }
 
   .input-box .btn {
@@ -75,5 +92,4 @@
     border: none;
     background-color: rgba(255, 255, 255, 1);
   }
-
 </style>
