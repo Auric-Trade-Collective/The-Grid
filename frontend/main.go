@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"io/fs"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -9,9 +10,12 @@ import (
 )
 
 //go:embed all:frontend/dist
-var assets embed.FS
+var assetsEmbed embed.FS
 
 func main() {
+	// Serve dist at root so "/" and "/index.html" resolve correctly
+	assets, _ := fs.Sub(assetsEmbed, "frontend/dist")
+
 	// Create an instance of the app structure
 	app := NewApp()
 
